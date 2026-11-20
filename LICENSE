@@ -1,0 +1,31 @@
+Copyright (c) 2026 Ali Lashkari (alilashkari.ir). All Rights Reserved.
+
+This repository is published on GitHub for portfolio and demonstration
+purposes only. Viewing the source code does not grant any license to use,
+copy, modify, merge, publish, distribute, sublicense, sell, or create
+derivative works from this software, in whole or in part.
+
+Permitted:
+  - Viewing and reading the source code on GitHub.
+
+Not permitted without prior written permission from the copyright holder:
+  - Installing or running this plugin on any site other than those
+    explicitly licensed by the author.
+  - Copying, modifying, or redistributing any part of this code.
+  - Reselling, sublicensing, or repackaging this plugin under any name.
+  - Removing or altering this notice or any copyright headers.
+
+Third-party fonts in assets/fonts (Vazirmatn, Lalezar) are distributed under
+the SIL Open Font License; see the OFL-*.txt files in that folder. They are
+not covered by the restrictions above.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE
+USE OF THE SOFTWARE.
+
+For licensing inquiries, contact:
+  Ali Lashkari
+  Email: alilashkari020@gmail.com
+  Website: https://alilashkari.ir/

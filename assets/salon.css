@@ -1,0 +1,355 @@
+/* ==========================================================================
+   سالن سینما — استایل
+   فونت‌ها از داخل خود پلاگین بارگذاری می‌شوند (بدون Google Fonts؛ در ایران هم کار می‌کند).
+   Vazirmatn و Lalezar هر دو با مجوز SIL OFL هستند (فایل مجوزها در assets/fonts).
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Salon Sans';
+  font-style: normal; font-display: swap; font-weight: 100 900;
+  src: url('fonts/vazirmatn-arabic-wght-normal.woff2') format('woff2-variations'), url('fonts/vazirmatn-arabic-wght-normal.woff2') format('woff2');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+@font-face {
+  font-family: 'Salon Sans';
+  font-style: normal; font-display: swap; font-weight: 100 900;
+  src: url('fonts/vazirmatn-latin-wght-normal.woff2') format('woff2-variations'), url('fonts/vazirmatn-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Salon Display';
+  font-style: normal; font-display: swap; font-weight: 400;
+  src: url('fonts/lalezar-arabic-400-normal.woff2') format('woff2');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+@font-face {
+  font-family: 'Salon Display';
+  font-style: normal; font-display: swap; font-weight: 400;
+  src: url('fonts/lalezar-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* ---------- توکن‌ها ---------- */
+#salon-app {
+  --velvet: #111;      /* زمینه‌ی سالن: شرابی خیلی تیره */
+  --curtain: #333;     /* سطح پنل‌ها */
+  --curtain-2: #0622BB;   /* سطح بالاتر: تب فعال، حباب چت */
+  --line: rgba(244, 233, 220, .13);
+  --brass: #dcaa4d;       /* رنگ اصلی: برنج */
+  --brass-hi: #e8bd68;
+  --paper: #f2e3c6;       /* کاغذ بلیت */
+  --ink: #2b1620;         /* متن روی برنج و کاغذ */
+  --text: #f4e9dc;
+  --muted: #b9a0a8;
+  --alert: #ff9d8f;
+
+  --r-lg: 16px;
+  --r-md: 10px;
+
+  color-scheme: dark;
+  font-family: 'Salon Sans', Vazirmatn, Tahoma, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 auto;
+  text-align: right;
+}
+#salon-app, #salon-app *, #salon-app *::before, #salon-app *::after { box-sizing: border-box; }
+#salon-app [hidden] { display: none !important; }
+
+/* قالب‌های وردپرس گاهی به button/input/label استایل می‌دهند؛ اینجا خنثی‌شان می‌کنیم */
+#salon-app button, #salon-app input, #salon-app select {
+  font: inherit; letter-spacing: 0; text-transform: none; margin: 0; box-shadow: none; text-shadow: none;
+}
+#salon-app button { -webkit-appearance: none; appearance: none; cursor: pointer; }
+#salon-app label { display: block; margin: 0; font-weight: inherit; }
+#salon-app p { margin: 0; }
+#salon-app :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+#salon-app * { scrollbar-width: thin; scrollbar-color: rgba(244,233,220,.25) transparent; }
+
+/* ---------- قاب اصلی ---------- */
+#salon-app .salon {
+  display: flex; flex-direction: column; gap: 16px;
+  background: var(--velvet);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: clamp(12px, 2vw, 22px);
+}
+
+/* ---------- سربرگ ---------- */
+#salon-app .salon-top { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
+#salon-app .salon-brand {
+  font-family: 'Salon Display', 'Salon Sans', Vazirmatn, sans-serif;
+  font-size: 28px; line-height: 1; color: var(--brass); white-space: nowrap;
+}
+#salon-app .salon-room-info { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+/* بلیتِ کد اتاق: تنها عنصر پررنگ صفحه */
+#salon-app .salon-ticket {
+  --cut: 58px;
+  position: relative; display: flex; align-items: stretch; direction: rtl;
+  height: 42px; background: var(--paper); color: var(--ink); border-radius: 6px;
+  -webkit-mask:
+    radial-gradient(circle 6px at calc(100% - var(--cut)) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle 6px at calc(100% - var(--cut)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+          mask:
+    radial-gradient(circle 6px at calc(100% - var(--cut)) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle 6px at calc(100% - var(--cut)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+}
+#salon-app .salon-ticket-label {
+  width: var(--cut); display: grid; place-items: center;
+  font-size: 12px; font-weight: 700;
+}
+#salon-app .salon-code {
+  display: grid; place-items: center; padding: 0 12px 0 16px;
+  border-right: 2px dashed rgba(43, 22, 32, .35);
+  font-size: 20px; font-weight: 800; letter-spacing: .24em; padding-left: calc(16px + .24em);
+  direction: ltr; background: none; border-radius: 0;
+}
+
+/* ---------- دکمه‌ها ---------- */
+#salon-app .salon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 40px; padding: 0 18px; border-radius: var(--r-md);
+  border: 1px solid transparent; background: var(--brass); color: var(--ink);
+  font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; text-decoration: none;
+  transition: background-color .15s, border-color .15s;
+}
+#salon-app .salon-btn:hover { background: var(--brass-hi); color: var(--ink); }
+#salon-app .salon-btn:active { transform: translateY(1px); }
+#salon-app .salon-btn.small { height: 32px; padding: 0 12px; font-size: 13px; }
+#salon-app .salon-btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+#salon-app .salon-btn.ghost:hover { background: rgba(244, 233, 220, .08); border-color: rgba(244, 233, 220, .3); color: var(--text); }
+#salon-app .salon-btn.danger:hover { color: var(--alert); border-color: rgba(255, 157, 143, .5); }
+#salon-app .salon-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---------- حاضران ---------- */
+#salon-app .salon-people { display: flex; flex-wrap: wrap; gap: 8px; margin-inline-start: auto; }
+#salon-app .salon-person {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 36px; padding-inline: 4px 12px;
+  background: var(--curtain); border: 1px solid var(--line); border-radius: 999px;
+  font-size: 13px; font-weight: 500;
+}
+#salon-app .salon-avatar {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: #0027ff; color: #fff; font-style: normal; font-size: 13px; font-weight: 700;
+}
+#salon-app .salon-person.host { border-color: rgba(220, 170, 77, .55); }
+#salon-app .salon-person.host .salon-avatar { box-shadow: 0 0 0 2px var(--curtain), 0 0 0 4px var(--brass); }
+#salon-app .salon-crown { color: var(--brass); font-style: normal; font-size: 12px; }
+#salon-app .salon-kick {
+  width: 22px; height: 22px; padding: 0; margin-inline-end: -6px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--muted); font-size: 17px; line-height: 1;
+  display: grid; place-items: center; transition: background-color .15s, color .15s;
+}
+#salon-app .salon-kick:hover { background: rgba(255, 157, 143, .16); color: var(--alert); }
+
+/* ---------- صحنه + پنل ---------- */
+#salon-app .salon-main { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+
+#salon-app .salon-stage {
+  position: relative; overflow: hidden; background: #000;
+  aspect-ratio: 16 / 9; border-radius: var(--r-lg);
+  box-shadow: 0 0 0 1px rgba(220, 170, 77, .28);
+}
+#salon-app #salon-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+#salon-app .salon-empty {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 24px; text-align: center; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 42%, #3a1b2b 0%, #150a10 72%);
+}
+#salon-app .salon-empty svg { width: 54px; height: 54px; color: var(--brass); opacity: .9; margin-bottom: 4px; }
+#salon-app .salon-empty p:first-of-type {
+  font-family: 'Salon Display', 'Salon Sans', Vazirmatn, sans-serif; font-size: clamp(22px, 3.4vw, 32px); line-height: 1.3; color: var(--text);
+}
+#salon-app .salon-empty p + p { max-width: 34ch; font-size: 14px; color: var(--muted); }
+
+#salon-app .salon-controls-bar { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; z-index: 2; }
+#salon-app .salon-cc {
+  height: 30px; min-width: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(20, 8, 14, .62); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+#salon-app .salon-cc:hover { background: rgba(20, 8, 14, .85); }
+
+#salon-app .salon-msg {
+  position: absolute; left: 14px; right: 14px; bottom: 68px; z-index: 2;
+  padding: 10px 14px; border-radius: var(--r-md); pointer-events: none;
+  background: rgba(20, 8, 14, .88); color: var(--text); border: 1px solid rgba(255, 157, 143, .45);
+  font-size: 14px; text-align: center;
+}
+
+/* پنل کناری */
+#salon-app .salon-panel {
+  background: var(--curtain); border: 1px solid var(--line); border-radius: var(--r-lg); min-width: 0;
+}
+#salon-app .salon-panel-in { display: flex; flex-direction: column; min-height: 0; }
+
+#salon-app .salon-tabs { display: flex; gap: 4px; padding: 8px 8px 0; border-bottom: 1px solid var(--line); }
+#salon-app .salon-tab {
+  position: relative; flex: 1; height: 42px; padding: 0 8px; border: 0; border-radius: 12px 12px 0 0;
+  background: transparent; color: var(--muted); font-size: 14px; font-weight: 600;
+  transition: color .15s, background-color .15s;
+}
+#salon-app .salon-tab:hover { background: rgba(244, 233, 220, .05); color: var(--text); }
+#salon-app .salon-tab.active { color: var(--brass); background: var(--curtain-2); }
+#salon-app .salon-tab.active::after {
+  content: ''; position: absolute; inset-inline: 10px; bottom: -1px; height: 2px; background: var(--brass); border-radius: 2px;
+}
+#salon-app .salon-dot {
+  display: inline-block; width: 8px; height: 8px; margin-inline-start: 6px; border-radius: 50%;
+  background: var(--alert); vertical-align: middle;
+}
+
+#salon-app .salon-panes { flex: 1; min-height: 0; overflow-y: auto; padding: 18px 16px; }
+#salon-app .salon-tabpane[data-pane="chat"]:not([hidden]) { display: flex; flex-direction: column; height: 100%; min-height: 320px; }
+
+#salon-app .salon-field { display: flex; flex-direction: column; gap: 8px; margin: 0 0 20px; }
+#salon-app .salon-field > label { font-size: 13px; font-weight: 600; color: var(--muted); }
+#salon-app .salon-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#salon-app .salon-hint { font-size: 12.5px; color: var(--muted); min-height: 0; }
+#salon-app .salon-hint:empty { display: none; }
+
+#salon-app input[type="text"], #salon-app select {
+  width: 100%; height: 42px; padding: 0 12px; border-radius: var(--r-md);
+  background: var(--velvet); color: var(--text); border: 1px solid var(--line); outline: 0;
+  transition: border-color .15s, box-shadow .15s;
+}
+#salon-app input[type="text"]::placeholder { color: rgba(185, 160, 168, .7); }
+#salon-app input[type="text"]:focus, #salon-app select:focus {
+  border-color: var(--brass); box-shadow: 0 0 0 3px rgba(220, 170, 77, .22);
+}
+#salon-app .salon-row input[type="text"] { flex: 1; min-width: 0; width: auto; direction: ltr; text-align: left; }
+#salon-app #salon-chat-input { direction: rtl; text-align: right; }
+#salon-app select {
+  -webkit-appearance: none; appearance: none; padding-inline-end: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23dcaa4d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: left 12px center;
+}
+#salon-app select option { background: var(--curtain); color: var(--text); }
+
+#salon-app .salon-or { display: flex; align-items: center; gap: 12px; margin: 2px 0 18px; color: var(--muted); font-size: 12.5px; }
+#salon-app .salon-or::before, #salon-app .salon-or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* کلید «فقط میزبان» */
+#salon-app .salon-check { display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
+#salon-app .salon-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+#salon-app .salon-switch {
+  position: relative; flex: none; width: 40px; height: 22px; border-radius: 999px;
+  background: var(--velvet); border: 1px solid var(--line); transition: background-color .18s, border-color .18s;
+}
+#salon-app .salon-switch::after {
+  content: ''; position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--muted); transition: transform .18s, background-color .18s;
+}
+#salon-app .salon-check input:checked + .salon-switch { background: rgba(220, 170, 77, .25); border-color: var(--brass); }
+#salon-app .salon-check input:checked + .salon-switch::after { transform: translateX(-18px); background: var(--brass); }
+#salon-app .salon-check input:focus-visible + .salon-switch { outline: 2px solid var(--brass); outline-offset: 2px; }
+#salon-app .salon-check input:disabled + .salon-switch { opacity: .5; }
+
+/* زیرنویس */
+#salon-app #salon-local-subs { flex-direction: row; flex-wrap: wrap; align-items: center; }
+#salon-app #salon-local-subs > label, #salon-app #salon-local-subs > p { flex: 0 0 100%; }
+#salon-app #salon-sub-active {
+  padding: 12px; background: var(--velvet); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+#salon-app #salon-sub-active > label { color: var(--text); }
+#salon-app #salon-sub-name { color: var(--brass); }
+#salon-app .salon-stepper { direction: ltr; justify-content: space-between; }
+#salon-app .salon-stepper .salon-btn { direction: ltr; }
+#salon-app #salon-sub-clear { flex: 1 0 100%; margin-top: 4px; direction: rtl; }
+#salon-app #salon-sub-delay { min-width: 44px; text-align: center; font-weight: 700; direction: ltr; font-variant-numeric: tabular-nums; }
+#salon-app input[type="file"] { width: 100%; color: var(--muted); font-size: 13px; }
+#salon-app input[type="file"]::file-selector-button {
+  height: 34px; margin-inline-end: 10px; padding: 0 14px; border-radius: 8px; cursor: pointer;
+  background: transparent; color: var(--text); border: 1px solid var(--line); font: inherit; font-size: 13px; font-weight: 600;
+}
+#salon-app input[type="file"]::file-selector-button:hover { background: rgba(244, 233, 220, .08); }
+
+/* چت */
+#salon-app .salon-chat-log {
+  flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+  padding: 12px; margin-bottom: 10px; background: var(--velvet); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+#salon-app .salon-chat-log:empty::before {
+  content: 'هنوز پیامی نیست. اولین نفر باش.'; margin: auto; color: var(--muted); font-size: 13px;
+}
+#salon-app .salon-chat-msg {
+  max-width: 88%; padding: 7px 12px; border-radius: 14px 14px 14px 4px;
+  background: var(--curtain-2); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; align-self: flex-end;
+}
+#salon-app .salon-chat-msg.me {
+  align-self: flex-start; background: rgba(220, 170, 77, .18); border-radius: 14px 14px 4px 14px;
+}
+#salon-app .salon-chat-name { display: block; font-size: 12px; font-weight: 700; color: var(--brass); }
+
+/* ---------- دسکتاپ: صحنه کنار پنل ---------- */
+@media (min-width: 1000px) {
+  #salon-app .salon-main { grid-template-columns: minmax(0, 1fr) 344px; grid-template-rows: minmax(480px, auto); }
+  #salon-app .salon-panel { position: relative; }
+  #salon-app .salon-panel-in { position: absolute; inset: 0; }
+  #salon-app .salon-stage { aspect-ratio: 16 / 9; }
+}
+
+/* ---------- موبایل ---------- */
+@media (max-width: 999px) {
+  #salon-app .salon-chat-log { height: 280px; flex: none; }
+  #salon-app .salon-tabpane[data-pane="chat"]:not([hidden]) { min-height: 0; height: auto; }
+}
+@media (max-width: 560px) {
+  #salon-app .salon-room-info .salon-btn { height: 36px; padding: 0 12px; }
+  #salon-app .salon-empty p + p { font-size: 12.5px; }
+  #salon-app .salon-empty svg { width: 40px; height: 40px; }
+  #salon-app .salon-brand { font-size: 24px; }
+  #salon-app .salon-people { margin-inline-start: 0; }
+  #salon-app .salon-stage { border-radius: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #salon-app *, #salon-app *::before, #salon-app *::after { transition: none !important; }
+}
+
+video::cue { font-size: 1.1em; background: rgba(0, 0, 0, .6); }
+
+/* ---------- زیرنویس سفارشی روی صحنه ---------- */
+#salon-app .salon-sub-overlay {
+  position: absolute; left: 5%; right: 5%; bottom: 8%; z-index: 2;
+  text-align: center; pointer-events: none; transition: bottom .12s ease;
+}
+#salon-app .salon-sub-cue {
+  display: inline-block; max-width: 100%; padding: 4px 12px; border-radius: 8px;
+  white-space: pre-line; line-height: 1.55; font-weight: 600; font-size: var(--sub-size, 20px);
+}
+#salon-app .salon-cc.active { border-color: var(--brass); color: var(--brass); }
+#salon-app .salon-stage:fullscreen { border-radius: 0; }
+#salon-app .salon-stage:fullscreen .salon-sub-cue { font-size: calc(var(--sub-size, 20px) * 1.45); }
+
+/* پنل تنظیمات ظاهر زیرنویس */
+#salon-app .salon-sub-style {
+  margin-top: 8px; padding: 12px; background: var(--velvet);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+}
+#salon-app .salon-sub-style-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; font-size: 13px; font-weight: 700; color: var(--brass);
+}
+#salon-app .salon-style-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+#salon-app .salon-style-grid .salon-field { margin: 0 0 10px; }
+#salon-app .salon-style-grid select { height: 36px; font-size: 13px; }
+#salon-app input[type="range"] {
+  width: 100%; accent-color: var(--brass); cursor: pointer; margin: 4px 0;
+}
+#salon-app .salon-color-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+#salon-app .salon-swatch {
+  width: 24px; height: 24px; padding: 0; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.25); transition: transform .12s, border-color .12s;
+}
+#salon-app .salon-swatch.active { border-color: var(--brass); transform: scale(1.15); box-shadow: 0 0 0 2px var(--velvet); }
+#salon-app input[type="color"] {
+  width: 30px; height: 26px; padding: 0; border: 1px solid var(--line);
+  border-radius: 6px; background: transparent; cursor: pointer;
+}

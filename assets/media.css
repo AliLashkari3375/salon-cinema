@@ -1,0 +1,211 @@
+/* مدیریت فیلم‌های سالن — هم در پیشخوان و هم در فرانت ([salon_upload]) */
+.salon-media {
+  --sm-ink: #1d2327;
+  --sm-muted: #646970;
+  --sm-line: #dcdcde;
+  --sm-bg: #fff;
+  --sm-accent: #2271b1;
+  --sm-ok: #1a7f4b;
+  --sm-warn: #a05a00;
+  --sm-err: #b32d2e;
+  color: var(--sm-ink);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 1000px;
+}
+.salon-media *, .salon-media *::before, .salon-media *::after { box-sizing: border-box; }
+
+.salon-media .sm-drop {
+  display: flex; flex-direction: column; gap: 4px; align-items: center; justify-content: center;
+  text-align: center; padding: 28px 16px; margin: 12px 0;
+  border: 2px dashed var(--sm-line); border-radius: 10px; background: #f6f7f7;
+  color: var(--sm-muted); cursor: pointer; transition: border-color .15s, background .15s;
+}
+.salon-media .sm-drop strong { color: var(--sm-ink); font-size: 15px; }
+.salon-media .sm-drop:hover, .salon-media .sm-drop:focus, .salon-media .sm-drop.over {
+  border-color: var(--sm-accent); background: #fff; outline: none;
+}
+
+.salon-media .sm-item {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(80px, 1fr) minmax(0, 2fr);
+  gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--sm-line);
+}
+.salon-media .sm-item .sm-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: ltr; text-align: right; }
+.salon-media .sm-item small { color: var(--sm-muted); }
+.salon-media .sm-bar { height: 8px; border-radius: 4px; background: #e6e6e8; overflow: hidden; }
+.salon-media .sm-bar i { display: block; height: 100%; width: 0; background: var(--sm-accent); transition: width .2s; }
+.salon-media .sm-item.ok .sm-bar i { background: var(--sm-ok); }
+.salon-media .sm-item.err .sm-bar i { background: var(--sm-err); }
+.salon-media .sm-item.err .sm-status { color: var(--sm-err); }
+.salon-media .sm-status { font-size: 13px; color: var(--sm-muted); }
+
+.salon-media .sm-log {
+  margin: 12px 0; padding: 12px; max-height: 280px; overflow: auto;
+  background: #111; color: #d1fae5; border-radius: 8px; direction: ltr; text-align: left;
+  white-space: pre-wrap; font-size: 12.5px; line-height: 1.6;
+}
+.salon-media .sm-tools { margin: 8px 0 0; }
+
+.salon-media .sm-table { width: 100%; border-collapse: collapse; margin-top: 16px; background: var(--sm-bg); }
+.salon-media .sm-table th, .salon-media .sm-table td {
+  padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--sm-line); vertical-align: middle;
+}
+.salon-media .sm-table th { font-weight: 600; background: #f6f7f7; }
+.salon-media .sm-size { direction: ltr; text-align: right; white-space: nowrap; unicode-bidi: isolate; }
+.salon-media .sm-fname { direction: ltr; text-align: right; overflow-wrap: anywhere; }
+.salon-media .sm-actions { white-space: nowrap; }
+.salon-media .sm-actions .button { margin-inline-start: 4px; }
+.salon-media .sm-del { color: var(--sm-err); border-color: var(--sm-err); }
+
+.salon-media .sm-chip {
+  display: inline-block; margin: 0 0 4px 4px; padding: 1px 8px; border-radius: 999px;
+  background: #eef2f7; border: 1px solid var(--sm-line); font-size: 12.5px;
+}
+.salon-media .sm-x { all: unset; cursor: pointer; color: var(--sm-err); padding: 0 2px; }
+.salon-media .sm-add { all: unset; cursor: pointer; color: var(--sm-accent); font-size: 12.5px; }
+.salon-media .sm-add:hover { text-decoration: underline; }
+.salon-media .sm-subform { display: inline-flex; gap: 4px; margin-inline-start: 6px; }
+.salon-media .sm-subform[hidden] { display: none; }
+
+.salon-media .sm-badge { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 12.5px; }
+.salon-media .sm-badge.ok { background: #e3f5ec; color: var(--sm-ok); }
+.salon-media .sm-badge.warn { background: #fdf0dc; color: var(--sm-warn); }
+.salon-media .sm-badge.muted { background: #eee; color: var(--sm-muted); }
+
+.salon-media .sm-empty, .salon-media .sm-err { padding: 14px 0; color: var(--sm-muted); }
+.salon-media .sm-err { color: var(--sm-err); }
+
+.salon-media-note { padding: 14px 16px; border: 1px solid #dcdcde; border-radius: 10px; background: #f6f7f7; }
+
+@media (max-width: 720px) {
+  .salon-media .sm-item { grid-template-columns: 1fr; gap: 4px; }
+  .salon-media .sm-table thead { display: none; }
+  .salon-media .sm-table, .salon-media .sm-table tbody, .salon-media .sm-table tr, .salon-media .sm-table td { display: block; width: 100%; }
+  .salon-media .sm-table tr { border-bottom: 1px solid var(--sm-line); padding: 8px 0; }
+  .salon-media .sm-table td { border: 0; padding: 3px 4px; }
+}
+
+/* ==========================================================================
+   تم فرانت ([salon_upload]) — هم‌شکل خود سالن: زمینه‌ی شرابی تیره، برنج، فونت‌های پلاگین
+   ========================================================================== */
+.salon-media--front {
+  --sm-ink: #f4e9dc;
+  --sm-muted: #b9a0a8;
+  --sm-line: rgba(244, 233, 220, .13);
+  --sm-bg: #111;
+  --sm-accent: #dcaa4d;
+  --sm-ok: #8fd6ad;
+  --sm-warn: #e8bd68;
+  --sm-err: #ff9d8f;
+  --curtain: #2a2a2a;
+  --brass: #dcaa4d;
+  --brass-hi: #e8bd68;
+  --ink-dark: #2b1620;
+  color-scheme: dark;
+  font-family: 'Salon Sans', Vazirmatn, Tahoma, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  max-width: none;
+  background: var(--sm-bg);
+  border: 1px solid var(--sm-line);
+  border-radius: 22px;
+  padding: clamp(14px, 2vw, 22px);
+  text-align: right;
+}
+.salon-media--front [hidden] { display: none !important; }
+
+.salon-media--front .sm-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 4px; }
+.salon-media--front .sm-title {
+  font-family: 'Salon Display', 'Salon Sans', Vazirmatn, sans-serif;
+  font-size: 28px; line-height: 1.2; color: var(--brass); margin: 0;
+}
+.salon-media--front .sm-sub { color: var(--sm-muted); font-size: 13.5px; margin: 0; }
+
+/* منطقه‌ی رها کردن: مثل صحنه‌ی خالی پرده‌ی سالن */
+.salon-media--front .sm-drop {
+  position: relative; overflow: hidden; gap: 8px; padding: 34px 18px; margin: 14px 0;
+  border: 1.5px dashed rgba(220, 170, 77, .45); border-radius: 16px; color: var(--sm-muted);
+  background: radial-gradient(ellipse at 50% 42%, #3a1b2b 0%, #150a10 72%);
+  box-shadow: 0 0 0 1px rgba(220, 170, 77, .12);
+}
+.salon-media--front .sm-drop svg { width: 46px; height: 46px; color: var(--brass); opacity: .95; }
+.salon-media--front .sm-drop strong {
+  font-family: 'Salon Display', 'Salon Sans', Vazirmatn, sans-serif; font-weight: 400;
+  font-size: clamp(20px, 3vw, 26px); color: var(--sm-ink);
+}
+.salon-media--front .sm-drop span { font-size: 13px; max-width: 46ch; }
+.salon-media--front .sm-drop:hover, .salon-media--front .sm-drop:focus-visible, .salon-media--front .sm-drop.over {
+  border-color: var(--brass); background: radial-gradient(ellipse at 50% 42%, #4a2236 0%, #1c0d14 72%); outline: none;
+}
+
+/* صف آپلود */
+.salon-media--front .sm-queue { display: flex; flex-direction: column; gap: 8px; }
+.salon-media--front .sm-queue:empty { display: none; }
+.salon-media--front .sm-item {
+  background: var(--curtain); border: 1px solid var(--sm-line); border-radius: 10px; padding: 9px 12px;
+}
+.salon-media--front .sm-item.err { border-color: rgba(255, 157, 143, .4); }
+.salon-media--front .sm-item small { color: var(--sm-muted); }
+.salon-media--front .sm-bar { height: 6px; background: rgba(244, 233, 220, .12); }
+.salon-media--front .sm-bar i { background: var(--brass); }
+.salon-media--front .sm-item.ok .sm-bar i { background: var(--sm-ok); }
+.salon-media--front .sm-item.err .sm-bar i { background: var(--sm-err); }
+.salon-media--front .sm-status { color: var(--sm-muted); }
+
+/* لاگ آماده‌سازی */
+.salon-media--front .sm-log {
+  background: #0a0508; color: #f2e3c6; border: 1px solid var(--sm-line); border-radius: 10px;
+  font-size: 12.5px; max-height: 240px;
+}
+
+/* جدول فیلم‌ها */
+.salon-media--front .sm-table { background: transparent; margin-top: 14px; }
+.salon-media--front .sm-table th {
+  background: transparent; color: var(--sm-muted); font-weight: 600; font-size: 13px;
+  border-bottom: 1px solid var(--sm-line);
+}
+.salon-media--front .sm-table td { border-bottom: 1px solid var(--sm-line); }
+.salon-media--front .sm-table tbody tr:hover td { background: rgba(244, 233, 220, .03); }
+.salon-media--front .sm-fname { color: var(--sm-ink); }
+.salon-media--front .sm-empty { color: var(--sm-muted); text-align: center; padding: 22px 0; }
+
+.salon-media--front .sm-badge { font-size: 12px; font-weight: 600; border: 1px solid transparent; }
+.salon-media--front .sm-badge.ok { background: rgba(143, 214, 173, .12); color: var(--sm-ok); border-color: rgba(143, 214, 173, .3); }
+.salon-media--front .sm-badge.warn { background: rgba(232, 189, 104, .12); color: var(--sm-warn); border-color: rgba(232, 189, 104, .35); }
+.salon-media--front .sm-badge.muted { background: rgba(244, 233, 220, .07); color: var(--sm-muted); border-color: var(--sm-line); }
+
+.salon-media--front .sm-chip { background: var(--curtain); border-color: var(--sm-line); color: var(--sm-ink); }
+.salon-media--front .sm-add { color: var(--brass); }
+
+.salon-media--front .sm-lang {
+  height: 30px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--sm-line);
+  background: var(--curtain); color: var(--sm-ink); font: inherit; font-size: 13px;
+}
+.salon-media--front .sm-lang option { background: var(--curtain); color: var(--sm-ink); }
+
+/* دکمه‌ها: همان دکمه‌های سالن (برنج / شبح) */
+.salon-media--front .button {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 34px; padding: 0 14px; border-radius: 10px;
+  border: 1px solid var(--sm-line); background: transparent; color: var(--sm-ink);
+  font: inherit; font-size: 13px; font-weight: 700; line-height: 1; white-space: nowrap;
+  transition: background-color .15s, border-color .15s;
+}
+.salon-media--front .button:hover { background: rgba(244, 233, 220, .08); border-color: rgba(244, 233, 220, .3); }
+.salon-media--front .button:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+.salon-media--front .button-primary { background: var(--brass); border-color: transparent; color: var(--ink-dark); }
+.salon-media--front .button-primary:hover { background: var(--brass-hi); border-color: transparent; }
+.salon-media--front .sm-del { color: var(--sm-ink); border-color: var(--sm-line); }
+.salon-media--front .sm-del:hover { color: var(--sm-err); border-color: rgba(255, 157, 143, .5); background: transparent; }
+.salon-media--front .button[disabled] { opacity: .5; cursor: not-allowed; }
+.salon-media--front a { color: var(--brass); }
+
+@media (max-width: 720px) {
+  .salon-media--front .sm-table td { border: 0; padding: 3px 4px; }
+  .salon-media--front .sm-table tbody tr:hover td { background: transparent; }
+  .salon-media--front .sm-table tr { border-bottom: 1px solid var(--sm-line); padding: 12px 0; }
+  .salon-media--front .sm-table tr:last-child { border-bottom: 0; }
+  .salon-media--front .sm-size { text-align: right; color: var(--sm-muted); font-size: 13px; }
+  .salon-media--front .sm-title { font-size: 24px; }
+  .salon-media--front .sm-drop { padding: 24px 12px; }
+}
